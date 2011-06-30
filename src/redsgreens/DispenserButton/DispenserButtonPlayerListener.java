@@ -15,8 +15,6 @@ import org.bukkit.inventory.ItemStack;
  */
 public class DispenserButtonPlayerListener extends PlayerListener {
 
-    public DispenserButtonPlayerListener() {}
-
     @Override
     public void onPlayerInteract(PlayerInteractEvent event)
     // catch player click events
@@ -34,6 +32,9 @@ public class DispenserButtonPlayerListener extends PlayerListener {
 		ItemStack item = player.getItemInHand();
 		if(item.getType() != Material.STONE_BUTTON) return;
 
+		// return if they can't build here
+		if(!DispenserButton.canBuild(player, block)) return;
+		
 		// determine which face was clicked and attach the corresponding button
 		Block button;
 		switch(event.getBlockFace())
