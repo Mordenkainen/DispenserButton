@@ -25,12 +25,14 @@ public class DispenserButtonPlayerListener extends PlayerListener {
 
 		// return if the block is not a dispenser
 		Block block = event.getClickedBlock();
-		if(block.getType() != Material.DISPENSER) return;
+		Material blockMaterial = block.getType();
+		if(blockMaterial != Material.DISPENSER && blockMaterial != Material.PISTON_BASE && blockMaterial != Material.PISTON_STICKY_BASE) return;
 
 		// return if they don't have a button in hand
 		Player player = event.getPlayer();
 		ItemStack item = player.getItemInHand();
-		if(item.getType() != Material.STONE_BUTTON) return;
+		Material itemMaterial = item.getType();
+		if(itemMaterial != Material.STONE_BUTTON && itemMaterial != Material.LEVER) return;
 
 		// return if they can't build here
 		if(!DispenserButton.canBuild(player, block)) return;
@@ -40,34 +42,34 @@ public class DispenserButtonPlayerListener extends PlayerListener {
 		switch(event.getBlockFace())
 		{
 		case EAST: // facing east
-			button = block.getFace(BlockFace.EAST); 
+			button = block.getRelative(BlockFace.EAST); 
 			if(button.getType() == Material.AIR)
 			{
-				button.setType(Material.STONE_BUTTON);
+				button.setType(itemMaterial);
 				button.setData((byte)4);
 			}
 			break;
 		case WEST: // facing west
-			button = block.getFace(BlockFace.WEST); 
+			button = block.getRelative(BlockFace.WEST); 
 			if(button.getType() == Material.AIR)
 			{
-				button.setType(Material.STONE_BUTTON);
+				button.setType(itemMaterial);
 				button.setData((byte)3);
 			}
 			break;
 		case NORTH: // facing north
-			button = block.getFace(BlockFace.NORTH); 
+			button = block.getRelative(BlockFace.NORTH); 
 			if(button.getType() == Material.AIR)
 			{
-				button.setType(Material.STONE_BUTTON);
+				button.setType(itemMaterial);
 				button.setData((byte)2);
 			}
 			break;
 		case SOUTH: // facing south
-			button = block.getFace(BlockFace.SOUTH); 
+			button = block.getRelative(BlockFace.SOUTH); 
 			if(button.getType() == Material.AIR)
 			{
-				button.setType(Material.STONE_BUTTON);
+				button.setType(itemMaterial);
 				button.setData((byte)1);
 			}
 			break;
