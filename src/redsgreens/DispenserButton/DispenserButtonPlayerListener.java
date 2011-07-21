@@ -23,12 +23,12 @@ public class DispenserButtonPlayerListener extends PlayerListener {
 		Action action = event.getAction();
 		if(action != Action.RIGHT_CLICK_BLOCK) return;
 
-		// return if the block is not a dispenser
+		// return if the block is not a dispenser or piston
 		Block block = event.getClickedBlock();
 		Material blockMaterial = block.getType();
-		if(blockMaterial != Material.DISPENSER && blockMaterial != Material.PISTON_BASE && blockMaterial != Material.PISTON_STICKY_BASE) return;
+		if(blockMaterial != Material.DISPENSER && blockMaterial != Material.PISTON_BASE && blockMaterial != Material.PISTON_STICKY_BASE && blockMaterial != Material.PISTON_MOVING_PIECE) return;
 
-		// return if they don't have a button in hand
+		// return if they don't have a button or lever in hand
 		Player player = event.getPlayer();
 		ItemStack item = player.getItemInHand();
 		Material itemMaterial = item.getType();

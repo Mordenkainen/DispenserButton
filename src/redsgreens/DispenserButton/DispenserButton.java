@@ -16,6 +16,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
  */
 public class DispenserButton extends JavaPlugin {
     private final DispenserButtonPlayerListener playerListener = new DispenserButtonPlayerListener();
+    private final DispenserButtonBlockListener blockListener = new DispenserButtonBlockListener();
     private final HashMap<Player, Boolean> debugees = new HashMap<Player, Boolean>();
 	private static WorldGuardPlugin WorldGuard = null;
 
@@ -40,6 +41,9 @@ public class DispenserButton extends JavaPlugin {
     	}
         
         getServer().getPluginManager().registerEvent(Type.PLAYER_INTERACT, playerListener, Priority.Monitor, this);
+        getServer().getPluginManager().registerEvent(Type.BLOCK_PHYSICS, blockListener, Priority.Monitor, this);
+//        getServer().getPluginManager().registerEvent(Type.BLOCK_PISTON_EXTEND, blockListener, Priority.Monitor, this);
+//        getServer().getPluginManager().registerEvent(Type.BLOCK_PISTON_RETRACT, blockListener, Priority.Monitor, this);
 
         System.out.println(this.Name + " v" + this.Version + " is enabled!" );
     }
