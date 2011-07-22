@@ -19,6 +19,10 @@ public class DispenserButtonPlayerListener extends PlayerListener {
     public void onPlayerInteract(PlayerInteractEvent event)
     // catch player click events
     {
+    	
+    	// return if the event is cancelled
+    	if(event.isCancelled()) return;
+    	
 		// return if the event is not a right-click-block action
 		Action action = event.getAction();
 		if(action != Action.RIGHT_CLICK_BLOCK) return;
@@ -34,9 +38,6 @@ public class DispenserButtonPlayerListener extends PlayerListener {
 		Material itemMaterial = item.getType();
 		if(itemMaterial != Material.STONE_BUTTON && itemMaterial != Material.LEVER) return;
 
-		// return if they can't build here
-		if(!DispenserButton.canBuild(player, block)) return;
-		
 		// determine which face was clicked and attach the corresponding button
 		Block button;
 		switch(event.getBlockFace())
@@ -71,6 +72,15 @@ public class DispenserButtonPlayerListener extends PlayerListener {
 			{
 				button.setType(itemMaterial);
 				button.setData((byte)1);
+			}
+			break;
+		case UP:
+			if(itemMaterial == Material.STONE_BUTTON) return; // buttons can't go on the top
+			button = block.getRelative(BlockFace.UP); 
+			if(button.getType() == Material.AIR)
+			{
+				button.setType(itemMaterial);
+				button.setData((byte)5);
 			}
 			break;
 		default: // top or bottom was clicked, do nothing

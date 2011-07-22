@@ -1,5 +1,5 @@
 DispenserButton - Put Buttons and Levers on Dispensers and Pistons
-Version: v0.3
+Version: v0.4
 
 The Minecraft 1.6 release removed the ability to place buttons on dispensers. Before 1.6, 
 placing a button on the ground next to a dispenser would cause the button to attach, which 
